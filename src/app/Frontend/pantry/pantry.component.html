@@ -1,0 +1,290 @@
+<div class="container">
+
+        <div class="c2">
+
+            <ng-template #content let-modal>
+                <div class="modal-header">
+                  <h4 class="modal-title" id="modal-basic-title">Add Item</h4>
+                  <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+                </div>
+                <div class="modal-body" style="background: #E5E5E5;">
+                  <form [formGroup]="pantryForm" (ngSubmit)="save(pantryForm.value)" style="margin-left: 10px;">
+
+                    <div class="row">
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                            <div class="form-group">
+                                <label for="">Pantry Master</label>
+                                <select class="form-select" formControlName="Pantry_Id" (change)="selectPantry($event)">
+                                    <option default value="">Select Master</option>
+                                    <option *ngFor="let pantry of pantryMasterData?.PantryList" value="{{pantry.Pantry_Id}}">{{pantry.Pantry_Name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                            <div class="form-group">
+                                <label for="">Location</label>
+                                <select class="form-select" formControlName="Location_Id">
+                                    <option default value="">Select Location</option>
+                                    <option value="{{location_id}}">{{location}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                            <div class="form-group">
+                                <label for="">Item Name</label>
+                                <input type="text" class="form-control st-name" formControlName="Item_Name" placeholder="Item Name"
+                                [class.is-valid]="pantryForm.controls['Item_Name'].valid"
+                                [class.is-invalid]="!pantryForm.controls['Item_Name'].valid && submitted"
+                                >
+                                <span class="text-danger" *ngIf="pantryForm.controls['Item_Name'].hasError('required') && pantryForm.controls['Item_Name'].touched">
+                                    Item name are required*
+                                </span>
+                                <span class="text-danger" *ngIf="pantryForm.controls['Item_Name'].hasError('minlength') && pantryForm.controls['Item_Name'].touched">
+                                    Item name must be at least 3 characters long*
+                                </span>
+                                <span class="text-danger" *ngIf="pantryForm.controls['Item_Name'].hasError('maxlength') && pantryForm.controls['Item_Name'].touched">
+                                    Item name must be less than 25 characters*
+                                </span>
+                                <span class="text-danger" *ngIf="pantryForm.controls['Item_Name'].hasError('pattern') && pantryForm.controls['Item_Name'].touched">
+                                    Item name is invalid*
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                            <div class="form-group">
+                                <label for="">Item Quantity</label>
+                                <mat-icon class="remove" (click)="minus()">remove</mat-icon>
+                                <input type="text" class="form-control st-qty" [(ngModel)]="quantity" formControlName="Item_Quantity"
+                                [class.is-valid]="pantryForm.controls['Item_Quantity'].valid"
+                                [class.is-invalid]="!pantryForm.controls['Item_Quantity'].valid && submitted"
+                                >
+                                <mat-icon class="add" (click)="plus()">add</mat-icon>
+                                <span class="text-danger" *ngIf="pantryForm.controls['Item_Quantity'].hasError('required') && pantryForm.controls['Item_Quantity'].touched">
+                                    Item Quantity is required*
+                                </span>
+                                <span class="text-danger" *ngIf="pantryForm.controls['Item_Quantity'].hasError('pattern') && pantryForm.controls['Item_Quantity'].touched">
+                                    Only Numbers are allowed*
+                                </span>
+                                <span class="text-danger" *ngIf="pantryForm.controls['Item_Quantity'].hasError('min') && pantryForm.controls['Item_Quantity'].touched">
+                                    Item Quantity must be at least 1 count*
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 col-xxl-8">
+                            <div class="form-group">
+                                <label for="">Item Description</label>
+                                <textarea formControlName="Item_Description" placeholder="Description" class="form-control st-rmk" id=""
+                                [class.is-valid]="pantryForm.controls['Item_Description'].valid"
+                                [class.is-invalid]="!pantryForm.controls['Item_Description'].valid && submitted"
+                                ></textarea>
+                                <span class="text-danger" *ngIf="pantryForm.controls['Item_Description'].hasError('required') && pantryForm.controls['Item_Description'].touched">
+                                    Description required*
+                                </span>
+                                <span class="text-danger" *ngIf="pantryForm.controls['Item_Description'].hasError('maxlength') && pantryForm.controls['Item_Description'].touched">
+                                    Description must be less than 255 characters*
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-save"><i class="fa fa-plus"></i> Add</button>
+                    </div>
+                  </form>
+                </div>
+            </ng-template>
+
+            <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 col-xxl-8">
+                    <div>
+                        <div class="form-group">
+                            <input type="text" class="form-control search-ct" [(ngModel)]="searchFilter" placeholder="Search Pantry Item">
+                        </div>
+                        <!-- <div>
+                            <mat-icon class="search">search</mat-icon>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                    <div class="form-group">
+                        <button class="btn btn-info" (click)="open(content)"><i class="fa fa-plus"></i> Add Item</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    <!-- </form> -->
+<!-- </div>
+
+<div class="container"> -->
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+            <div class="data-table">
+                <div class="table-responsive">
+                    <table class="table table-borderless table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Sr. No.</th>
+                                <!-- <th>Pantry Floors</th> -->
+                                <th>Name</th>
+                                <th>Quantity</th>
+                                <th>Description</th>
+                                <th>Status</th>
+                                <th>Location</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+            
+                        <tbody>
+                            <tr *ngFor="let item of pantryItemList?.PantryItemList | filter: searchFilter | paginate: {itemsPerPage: 10, currentPage: p} let i = index">
+                                <td>{{i+1}}</td>
+                                <!-- <td>{{item.Pantry_Name | titlecase}}</td> -->
+                                <td>{{item.Item_Name | titlecase}}</td>
+                                <td>{{item.Available_Pantry_Item}}</td>
+                                <td>{{item.Item_Description | titlecase}}</td>
+                                <td *ngIf="item.Available_Pantry_Item == 0 else elseBlock">Out Of Stock</td>
+                                <ng-template #elseBlock>
+                                    <td>{{item.Available_Pantry_Item <= 10 ? "Limited" : "Available"}}</td>
+                                </ng-template>
+                                <td>{{item.Location | titlecase}}</td>
+                                <td>
+                                    <span (click)="openEdit( contentEdit , item.Item_Id)" class="edit1"><img src="../../../assets/img/fluent_edit-48-filled.png" alt="edit"></span>
+                                    <!-- <mat-icon (click)="editDialog(item)" class="edit1">edit</mat-icon> -->
+                                    <span class="vertical-line"></span>
+                                    <span (click)="remove(contentDelete, item.Item_Id, item.Location_Id, item.Pantry_Id, item.UserId)" class="del1"><img src="../../../assets/img/fluent_delete-48-filled.png" alt="delete"></span>
+                                    <!-- <mat-icon (click)="remove(item)" class="del1">delete</mat-icon> -->
+                                </td>
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+                </div>
+                
+                <div class="pagination d-flex justify-content-end">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <ng-template #contentEdit let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Update Item</h4>
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body" style="background: #E5E5E5;">
+            <form [formGroup]="editForm" (ngSubmit)="update(editForm.value)" style="margin-left: 10px;">
+                
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                        <div class="form-group">
+                            <label for="">Pantry Master</label>
+                            <select class="form-select" formControlName="Pantry_Id" (change)="selectPantry($event)">
+                                <option default value="">Select Master</option>
+                                <option *ngFor="let pantry of pantryMasterData?.PantryList" value="{{pantry.Pantry_Id}}">{{pantry.Pantry_Name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                        <div class="form-group">
+                            <label for="">Location</label>
+                            <select class="form-select" formControlName="Location_Id">
+                                <option default value="{{editForm.get('Location_Id')?.value}}">{{location_name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="row">
+    
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                        <div class="form-group">
+                            <label for="">Item Name</label>
+                            <input type="text" class="form-control st-name" formControlName="Item_Name" placeholder="Item Name" readonly>
+                            <span class="text-danger" *ngIf="editForm.controls['Item_Name'].hasError('required') && editForm.controls['Item_Name'].touched">
+                                Item name are required*
+                            </span>
+                            <span class="text-danger" *ngIf="editForm.controls['Item_Name'].hasError('minlength') && editForm.controls['Item_Name'].touched">
+                                Item name must be at least 3 characters long*
+                            </span>
+                            <span class="text-danger" *ngIf="editForm.controls['Item_Name'].hasError('maxlength') && editForm.controls['Item_Name'].touched">
+                                Item name must be less than 25 characters*
+                            </span>
+                            <span class="text-danger" *ngIf="editForm.controls['Item_Name'].hasError('pattern') && editForm.controls['Item_Name'].touched">
+                                Item name is invalid*
+                            </span>
+                        </div>
+                    </div>
+    
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                        <div class="form-group">
+                            <label for="">Item Quantity</label>
+                            <mat-icon class="remove" (click)="minus1()">remove</mat-icon>
+                            <input type="text" class="form-control st-qty" [(ngModel)]="quantity1" formControlName="Item_Quantity"
+                            [class.is-valid]="editForm.controls['Item_Quantity'].valid"
+                            [class.is-invalid]="!editForm.controls['Item_Quantity'].valid && submitted"
+                            >
+                            <mat-icon class="add" (click)="plus1()">add</mat-icon>
+                            <span class="text-danger" *ngIf="editForm.controls['Item_Quantity'].hasError('required') && editForm.controls['Item_Quantity'].touched">
+                                Item Quantity are required*
+                            </span>
+                            <span class="text-danger" *ngIf="editForm.controls['Item_Quantity'].hasError('pattern') && editForm.controls['Item_Quantity'].touched">
+                                Only Numbers are allowed*
+                            </span>
+                            <span class="text-danger" *ngIf="editForm.controls['Item_Quantity'].hasError('min') && editForm.controls['Item_Quantity'].touched">
+                                Item Quantity must be at least 1 count*
+                            </span>
+                        </div>
+                    </div>
+    
+                </div>
+                <div class="row">
+                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 col-xxl-8">
+                        <div class="form-group">
+                            <label for="">Item Description</label>
+                            <textarea formControlName="Item_Description" placeholder="Description" class="form-control st-rmk" id="" readonly></textarea>
+                            <span class="text-danger" *ngIf="editForm.controls['Item_Description'].hasError('required') && editForm.controls['Item_Description'].touched">
+                                Description required*
+                            </span>
+                            <span class="text-danger" *ngIf="editForm.controls['Item_Description'].hasError('maxlength') && editForm.controls['Item_Description'].touched">
+                                Description must be less than 255 characters*
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-save"><i class="fa fa-plus"></i> Add</button>
+                </div>
+              </form>
+        </div>
+    </ng-template>
+    
+    <!-- Delete-popup -->
+    
+    <ng-template #contentDelete let-c="close" let-d="dismiss" let-modal>    
+        <div class="modal-header">    
+            <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>    
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>    
+        <div class="modal-body">    
+            <p class="fs-4 fw-semibold">Are you sure to delete this?</p>    
+        </div>    
+        <div class="modal-footer">    
+            <button type="button" class="btn btn-save" (click)="d('Cross click')">Cancel</button>    
+            <button type="button" class="btn btn-save" (click)="c('yes')">Yes</button>    
+        </div>    
+    </ng-template>
+
+</div>

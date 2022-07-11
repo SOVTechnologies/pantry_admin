@@ -1,0 +1,812 @@
+@media (min-width: 768px){
+    .c2{
+        margin-top: -20px;
+    }
+    .form-group{
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 20px;
+        margin-right: 20px;
+    }
+    .form-control{
+        text-align: left;
+        outline: none;
+        height: 30px;
+        border-radius: 10px;
+        background: rgba(196, 196, 196, 0.28);
+        box-sizing: border-box;
+        border: inherit;
+        font-family: 'Inter', sans-serif;
+        font-size: 10px;
+        font-weight: 600;
+        margin-top: 10px;
+    }
+    .form-select{
+        text-align: left;
+        outline: none;
+        height: 30px;
+        border-radius: 10px;
+        box-sizing: border-box;
+        background: rgba(196, 196, 196, 0.28);
+        border: inherit;
+        font-family: 'Inter', sans-serif;
+        font-size: 10px;
+        font-weight: 600;
+        margin-top: 10px;
+    }
+    .form-select:focus{
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        box-shadow: 0 0 0 rgba(196, 196, 196, 0.28);
+    }
+    .form-select::after{
+        color: #000000;
+        pointer-events: none;
+    }
+    option{
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        background: rgba(196, 196, 196, 0.28);
+        font-weight: 600;
+    }
+    .add{
+        position: relative;
+        top: -23px;
+        left: 60px;
+        cursor: pointer;
+        font-size: 15px;
+    }
+    .remove{
+        position: relative;
+        top: 42px;
+        left: 0px;
+        cursor: pointer;
+        font-size: 15px;
+    }
+    label{
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-size: 10px;
+        line-height: 8px;
+        color: #000;
+        font-weight: 700;
+    }
+    input::placeholder{
+        font-family: 'Inter', sans-serif;
+        font-size: 10px;
+    }
+    input:focus{
+        border: none;
+        outline: none;
+        box-shadow: 0 0 0 rgba(196, 196, 196, 0.28);
+    }
+    .st-rmk{
+        height: 122px;
+    }
+    .st-qty{
+        text-align: center;
+    }
+    textarea:focus{
+        border: none;
+        outline: none;
+        box-shadow: 0 0 0 rgba(196, 196, 196, 0.28);
+    }
+    .btn{
+        width: 125px;
+        height: 30px;
+        background: #004A80;
+        border-radius: 10px;
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 10px;
+        line-height: 10px;
+        color: #FFFFFF;
+        border: inherit;
+    }
+    .btn-info{
+        margin-top: 2.5rem;
+        margin-left: 1.9rem;
+    }
+    .btn-save{
+        margin-left: 0px;
+        width: 90px;
+    }
+    .search{
+        position: absolute;
+        top: 3.4rem;
+        left: 22.3rem;
+        color: #004A80;
+        font-size: 20px;
+    }
+    .search-ct{
+        margin-top: 40px;
+    }
+    .modal-content{
+        background: #E5E5E5 !important;
+    }
+    .modal-header{
+        height: 30px;
+        background: #F98327;
+    }
+    .modal-title{
+        margin: 16px 0 16px;
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 12px;
+        color: #FFFFFF;
+    }
+    .btn-close{
+        color: #FFFFFF !important;
+    }
+    
+    .data-table{
+        margin-top: 50px;
+        margin-left: 0px;
+    }
+    table{
+        width: 100%;
+    }
+    thead{
+        background: #F98327;
+        border: inherit;
+    }
+    // .sr-no{
+    //     width: 80px;
+    // }
+    // .loc{
+    //     width: 200px;
+    // }
+    // .act{
+    //     width: 110px;
+    // }
+    tr, th{
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 10px;
+        color: #FFFFFF;
+        text-align: left;
+    }
+    tbody{
+        background: rgba(196, 196, 196, 0.28);
+        border: inherit;
+    }
+    tr, td{
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 10px;
+        line-height: 10px;
+        color: #000000;
+        text-align: left;
+    }
+    .edit1 img, .del1 img{
+        cursor: pointer;
+        width: 18px;
+    }
+    .vertical-line{
+        display: inline-block;
+        border-left: 1px solid #ccc;
+        margin: 0 10px;
+        height: px;
+    }
+    .ngx-pagination .current{
+        background: #F98327 !important;
+        color: #fefefe !important;
+    }
+    .ngx-pagination .disabled{
+        color: #000000 !important;
+    }
+}
+
+@media (min-width: 992px){    
+    .form-group{
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 25px;
+        margin-right: 25px;
+    }
+    .form-control{
+        text-align: left;
+        outline: none;
+        height: 45px;
+        border-radius: 10px;
+        background: rgba(196, 196, 196, 0.28);
+        box-sizing: border-box;
+        border: inherit;
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        margin-top: 10px;
+    }
+    .form-select{
+        text-align: left;
+        outline: none;
+        height: 45px;
+        border-radius: 10px;
+        box-sizing: border-box;
+        background: rgba(196, 196, 196, 0.28);
+        border: inherit;
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        margin-top: 10px;
+    }
+    .form-select:focus{
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        box-shadow: 0 0 0 rgba(196, 196, 196, 0.28);
+    }
+    .form-select::after{
+        color: #000000;
+        pointer-events: none;
+    }
+    option{
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        background: rgba(196, 196, 196, 0.28);
+        font-weight: 600;
+    }
+    .add{
+        position: relative;
+        top: -35px;
+        left: 120px;
+        cursor: pointer;
+        font-size: 24px;
+    }
+    .remove{
+        position: relative;
+        top: 45px;
+        left: -100px;
+        cursor: pointer;
+        font-size: 24px;
+    }
+    label{
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-size: 15px;
+        line-height: 14px;
+        color: #000;
+        font-weight: 700;
+    }
+    input::placeholder{
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+    }
+    input:focus{
+        border: none;
+        outline: none;
+        box-shadow: 0 0 0 rgba(196, 196, 196, 0.28);
+    }
+    .st-rmk{
+        height: 122px;
+    }
+    .st-qty{
+        text-align: center;
+    }
+    textarea:focus{
+        border: none;
+        outline: none;
+        box-shadow: 0 0 0 rgba(196, 196, 196, 0.28);
+    }
+    .btn{
+        width: 225px;
+        height: 40px;
+        background: #004A80;
+        border-radius: 10px;
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 14px;
+        color: #FFFFFF;
+        border: inherit;
+    }
+    .btn-info{
+        margin-top: 2.7rem;
+        margin-left: 4rem;
+    }
+    .btn-save{
+        margin-left: 0px;
+        width: 125px;
+    }
+    .search{
+        position: absolute;
+        top: 3.8rem;
+        left: 29.5rem;
+        color: #004A80;
+        font-size: 30px;
+    }
+    .search-ct{
+        margin-top: 40px;
+    }
+    .modal-content{
+        background: #E5E5E5 !important;
+    }
+    .modal-header{
+        height: 48px;
+        background: #F98327;
+    }
+    .modal-title{
+        margin: 16px 0 16px;
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        color: #FFFFFF;
+    }
+    .btn-close{
+        color: #FFFFFF !important;
+    }
+    
+    .data-table{
+        margin-top: 50px;
+        margin-left: 0px;
+    }
+    table{
+        width: 100%;
+    }
+    thead{
+        background: #F98327;
+        border: inherit;
+    }
+    .sr-no{
+        width: 80px;
+    }
+    .st-n{
+        width: 280px;
+    }
+    .act{
+        width: 110px;
+    }
+    tr, th{
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 12px;
+        color: #FFFFFF;
+        text-align: left;
+    }
+    tbody{
+        background: rgba(196, 196, 196, 0.28);
+        border: inherit;
+    }
+    tr, td{
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 12px;
+        color: #000000;
+        text-align: left;
+    }
+    .edit1 img, .del1 img{
+        cursor: pointer;
+        width: 25px;
+    }
+    .vertical-line{
+        display: inline-block;
+        border-left: 1px solid #ccc;
+        margin: 0 10px;
+        height: px;
+    }
+    .ngx-pagination .current{
+        background: #F98327 !important;
+        color: #fefefe !important;
+    }
+    .ngx-pagination .disabled{
+        color: #000000 !important;
+    }
+}
+
+@media (min-width: 1200px){
+    .form-group{
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 25px;
+        margin-right: 25px;
+    }
+    .form-control{
+        text-align: left;
+        outline: none;
+        height: 45px;
+        border-radius: 10px;
+        background: rgba(196, 196, 196, 0.28);
+        box-sizing: border-box;
+        border: inherit;
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        margin-top: 10px;
+    }
+    .form-select{
+        text-align: left;
+        outline: none;
+        height: 45px;
+        border-radius: 10px;
+        box-sizing: border-box;
+        background: rgba(196, 196, 196, 0.28);
+        border: inherit;
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        margin-top: 10px;
+    }
+    .form-select:focus{
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        box-shadow: 0 0 0 rgba(196, 196, 196, 0.28);
+    }
+    .form-select::after{
+        color: #000000;
+        pointer-events: none;
+    }
+    option{
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        background: rgba(196, 196, 196, 0.28);
+        font-weight: 600;
+    }
+    .add{
+        position: relative;
+        top: -35px;
+        left: 200px;
+        cursor: pointer;
+        font-size: 24px;
+    }
+    .remove{
+        position: relative;
+        top: 45px;
+        left: -105px;
+        cursor: pointer;
+        font-size: 24px;
+    }
+    label{
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-size: 16px;
+        line-height: 19px;
+        color: #000;
+        font-weight: 700;
+    }
+    input::placeholder{
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+    }
+    input:focus{
+        border: none;
+        outline: none;
+        box-shadow: 0 0 0 rgba(196, 196, 196, 0.28);
+    }
+    .st-rmk{
+        height: 122px;
+    }
+    .st-qty{
+        text-align: center;
+    }
+    textarea:focus{
+        border: none;
+        outline: none;
+        box-shadow: 0 0 0 rgba(196, 196, 196, 0.28);
+    }
+    .btn{
+        width: 170px;
+        height: 40px;
+        background: #004A80;
+        border-radius: 10px;
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 16px;
+        color: #FFFFFF;
+        border: inherit;
+    }
+    .btn-info{
+        margin-top: 2.9rem;
+        margin-left: 7rem;
+    }
+    .btn-save{
+        margin-left: 0px;
+        width: 125px;
+    }
+    .search{
+        position: absolute;
+        top: 3.8rem;
+        left: 37.7rem;
+        color: #004A80;
+        font-size: 30px;
+    }
+    .search-ct{
+        margin-top: 40px;
+    }
+    .modal-content{
+        background: #E5E5E5 !important;
+    }
+    .modal-header{
+        height: 48px;
+        background: #F98327;
+    }
+    .modal-title{
+        margin: 16px 0 16px;
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        color: #FFFFFF;
+    }
+    .btn-close{
+        color: #FFFFFF !important;
+    }
+    
+    .data-table{
+        margin-top: 50px;
+        margin-left: 0px;
+    }
+    table{
+        width: 100%;
+    }
+    thead{
+        background: #F98327;
+        border: inherit;
+    }
+    .sr-no{
+        width: 80px;
+    }
+    .st-n{
+        width: 280px;
+    }
+    .act{
+        width: 110px;
+    }
+    tr, th{
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 12px;
+        color: #FFFFFF;
+        text-align: left;
+    }
+    tbody{
+        background: rgba(196, 196, 196, 0.28);
+        border: inherit;
+    }
+    tr, td{
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 12px;
+        color: #000000;
+        text-align: left;
+    }
+    .edit1, .del1{
+        cursor: pointer;
+    }
+    .vertical-line{
+        display: inline-block;
+        border-left: 1px solid #ccc;
+        margin: 0 10px;
+        height: px;
+    }
+    .ngx-pagination .current{
+        background: #F98327 !important;
+        color: #fefefe !important;
+    }
+    .ngx-pagination .disabled{
+        color: #000000 !important;
+    }
+}
+
+@media (min-width: 1400px){
+    .form-group{
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 25px;
+        margin-right: 25px;
+    }
+    .form-control{
+        text-align: left;
+        outline: none;
+        height: 45px;
+        border-radius: 10px;
+        background: rgba(196, 196, 196, 0.28);
+        box-sizing: border-box;
+        border: inherit;
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        margin-top: 10px;
+    }
+    .form-select{
+        text-align: left;
+        outline: none;
+        height: 45px;
+        border-radius: 10px;
+        box-sizing: border-box;
+        background: rgba(196, 196, 196, 0.28);
+        border: inherit;
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        margin-top: 10px;
+    }
+    .form-select:focus{
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        box-shadow: 0 0 0 rgba(196, 196, 196, 0.28);
+    }
+    .form-select::after{
+        color: #000000;
+        pointer-events: none;
+    }
+    option{
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        background: rgba(196, 196, 196, 0.28);
+        font-weight: 600;
+    }
+    .add{
+        position: relative;
+        top: -35px;
+        left: 200px;
+        cursor: pointer;
+        font-size: 24px;
+    }
+    .remove{
+        position: relative;
+        top: 45px;
+        left: -105px;
+        cursor: pointer;
+        font-size: 24px;
+    }
+    label{
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-size: 16px;
+        line-height: 19px;
+        color: #000;
+        font-weight: 700;
+    }
+    input::placeholder{
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+    }
+    input:focus{
+        border: none;
+        outline: none;
+        box-shadow: 0 0 0 rgba(196, 196, 196, 0.28);
+    }
+    .st-rmk{
+        height: 122px;
+    }
+    .st-qty{
+        text-align: center;
+    }
+    textarea:focus{
+        border: none;
+        outline: none;
+        box-shadow: 0 0 0 rgba(196, 196, 196, 0.28);
+    }
+    .btn{
+        width: 170px;
+        height: 40px;
+        background: #004A80;
+        border-radius: 10px;
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 19px;
+        color: #FFFFFF;
+        border: inherit;
+    }
+    .btn-info{
+        margin-top: 2.7rem;
+        margin-left: 14rem;
+    }
+    .btn-save{
+        margin-left: 0px;
+        width: 125px;
+    }
+    .search{
+        position: absolute;
+        top: 3.8rem;
+        left: 52.5rem;
+        color: #004A80;
+        font-size: 30px;
+    }
+    .search-ct{
+        margin-top: 40px;
+    }
+    .modal-content{
+        background: #E5E5E5 !important;
+    }
+    .modal-header{
+        height: 48px;
+        background: #F98327;
+    }
+    .modal-title{
+        margin: 16px 0 16px;
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        color: #FFFFFF;
+    }
+    .btn-close{
+        color: #FFFFFF !important;
+    }
+    
+    .data-table{
+        margin-top: 50px;
+        margin-left: 0px;
+    }
+    table{
+        width: 100%;
+    }
+    thead{
+        background: #F98327;
+        border: inherit;
+    }
+    .sr-no{
+        width: 80px;
+    }
+    .st-n{
+        width: 280px;
+    }
+    .act{
+        width: 110px;
+    }
+    tr, th{
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 19px;
+        color: #FFFFFF;
+        text-align: left;
+    }
+    tbody{
+        background: rgba(196, 196, 196, 0.28);
+        border: inherit;
+    }
+    tr, td{
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        color: #000000;
+        text-align: left;
+    }
+    .edit1, .del1{
+        cursor: pointer;
+    }
+    .vertical-line{
+        display: inline-block;
+        border-left: 1px solid #ccc;
+        margin: 0 10px;
+        height: px;
+    }
+    .ngx-pagination .current{
+        background: #F98327 !important;
+        color: #fefefe !important;
+    }
+    .ngx-pagination .disabled{
+        color: #000000 !important;
+    }
+}

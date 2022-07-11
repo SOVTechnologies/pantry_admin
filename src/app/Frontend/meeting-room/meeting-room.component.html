@@ -1,0 +1,289 @@
+<div class="container">
+        <div class="c2">
+
+            <ng-template #content let-modal>
+                <div class="modal-header">
+                  <h4 class="modal-title" id="modal-basic-title">Add Meeting Room</h4>
+                  <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+                </div>
+                <div class="modal-body" style="background: #E5E5E5;">
+                  <form [formGroup]="meetingForm" (ngSubmit)="save(meetingForm.value)" style="margin-left: 10px;">
+                    <div class="row">
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                            <div class="form-group">
+                                <label for="">Meeting Room Name</label>
+                                <input type="text" class="form-control st-name" formControlName="Meeting_Name" placeholder="Meeting Room Name"
+                                [class.is-valid]="meetingForm.controls['Meeting_Name'].valid"
+                                [class.is-invalid]="!meetingForm.controls['Meeting_Name'].valid && submitted"
+                                >
+                                <span class="text-danger" *ngIf="meetingForm.controls['Meeting_Name'].hasError('required') && meetingForm.controls['Meeting_Name'].touched">
+                                    Meeting Room Name is required*
+                                </span>
+                                <span class="text-danger" *ngIf="meetingForm.controls['Meeting_Name'].hasError('minlength') && meetingForm.controls['Meeting_Name'].touched">
+                                    Meeting Room Name must be at least 3 characters long*
+                                </span>
+                                <span class="text-danger" *ngIf="meetingForm.controls['Meeting_Name'].hasError('maxlength') && meetingForm.controls['Meeting_Name'].touched">
+                                    Meeting Room Name must be less than 25 characters*
+                                </span>
+                                <span class="text-danger" *ngIf="meetingForm.controls['Meeting_Name'].hasError('pattern') && meetingForm.controls['Meeting_Name'].touched">
+                                    Meeting Room Name is invalid*
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                            <div class="form-group">
+                                <label for="">Location</label>
+                                <select class="form-select" formControlName="Location_Id">
+                                    <option default value="">Select Location</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                            <div class="form-group">
+                                <label for="">Sitting Capacity</label>
+                                <mat-icon class="remove" (click)="minus()">remove</mat-icon>
+                                <input type="text" class="form-control st-qty" [(ngModel)]="sitting" formControlName="Meeting_Size" placeholder="Sitting Capacity"
+                                [class.is-valid]="meetingForm.controls['Meeting_Size'].valid"
+                                [class.is-invalid]="!meetingForm.controls['Meeting_Size'].valid && submitted"
+                                >
+                                <mat-icon class="add" (click)="plus()">add</mat-icon>
+                                <span class="text-danger" *ngIf="meetingForm.controls['Meeting_Size'].hasError('required') && meetingForm.controls['Meeting_Size'].touched">
+                                    Siiting Capacity is required*
+                                </span>
+                                <span class="text-danger" *ngIf="meetingForm.controls['Meeting_Size'].hasError('pattern') && meetingForm.controls['Meeting_Size'].touched">
+                                    Only Numbers are allowed*
+                                </span>
+                                <span class="text-danger" *ngIf="meetingForm.controls['Meeting_Size'].hasError('min') && meetingForm.controls['Meeting_Size'].touched">
+                                    Siiting Capacity must be at least 1 count*
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                            <div class="form-group">
+                                <label for="">Meeting Floor</label>
+                                <mat-icon class="remove1" (click)="minus2()">remove</mat-icon>
+                                <input type="text" class="form-control st-qty" [(ngModel)]="floor" formControlName="Meeting_Floor" placeholder="Meeting Floor"
+                                [class.is-valid]="meetingForm.controls['Meeting_Floor'].valid"
+                                [class.is-invalid]="!meetingForm.controls['Meeting_Floor'].valid && submitted"
+                                >
+                                <mat-icon class="add" (click)="plus2()">add</mat-icon>
+                                <span class="text-danger" *ngIf="meetingForm.controls['Meeting_Floor'].hasError('required') && meetingForm.controls['Meeting_Floor'].touched">
+                                    Meeting Floor is required*
+                                </span>
+                                <span class="text-danger" *ngIf="meetingForm.controls['Meeting_Floor'].hasError('pattern') && meetingForm.controls['Meeting_Floor'].touched">
+                                    Only Numbers are allowed*
+                                </span>
+                                <span class="text-danger" *ngIf="meetingForm.controls['Meeting_Floor'].hasError('min') && meetingForm.controls['Meeting_Floor'].touched">
+                                    Meeting Floor must be at least 1 count*
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 col-xxl-8">
+                            <div class="form-group">
+                                <label for="">Description</label>
+                                <textarea formControlName="Meeting_Description" placeholder="Description" class="form-control st-rmk" id=""
+                                [class.is-valid]="meetingForm.controls['Meeting_Description'].valid"
+                                [class.is-invalid]="!meetingForm.controls['Meeting_Description'].valid && submitted"
+                                ></textarea>
+                                <span class="text-danger" *ngIf="meetingForm.controls['Meeting_Description'].hasError('required') && meetingForm.controls['Meeting_Description'].touched">
+                                    Description are required*
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-save"><i class="fa fa-floppy-o"></i> Save</button>
+                    </div>
+                  </form>
+                </div>
+            </ng-template>
+
+            <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 col-xxl-8">
+                    <div>
+                        <div class="form-group">
+                            <input type="text" class="form-control search-ct" [(ngModel)]="searchFilter" placeholder="Search Meeting Room">
+                        </div>
+                        <!-- <div>
+                            <mat-icon class="search">search</mat-icon>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                    <div class="form-group">
+                        <button class="btn btn-info" (click)="open(content)"><i class="fa fa-plus"></i> Add Meeting Room</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</div>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+            <div class="data-table">
+
+                <div class="table-responsive">
+                    <table class="table table-borderless table-striped table-hover">
+        
+                        <thead>
+                            <tr>
+                                <th>Sr. No.</th>
+                                <th>Location</th>
+                                <th>Meeting Room Name</th>
+                                <th>Sitting Capacity</th>
+                                <th>Floors</th>
+                                <th>Description</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+            
+                        <tbody>
+                            <tr *ngFor="let item of meetingList?.MeetingRoomList | filter: searchFilter | paginate: {itemsPerPage: 10, currentPage: p} let i = index">
+                                <td>{{i+1}}</td>
+                                <td>{{item.Location | titlecase}}</td>
+                                <td>{{item.Meeting_Name | titlecase}}</td>
+                                <td>{{item.Meeting_Size}}</td>
+                                <td>{{item.Meeting_Floor | titlecase}}</td>
+                                <td>{{item.Meeting_Description | titlecase}}</td>
+                                <td>
+                                    <span (click)="openEdit(contentEdit , item.Meeting_Id)" class="edit1"><img src="../../../assets/img/fluent_edit-48-filled.png" alt="edit"></span>
+                                    <!-- <mat-icon (click)="editDialog(item)" class="edit1" >edit</mat-icon> -->
+                                    <span class="vertical-line"></span>
+                                    <span (click)="remove(item.Meeting_Id, item.Location_Id)" class="del1"><img src="../../../assets/img/fluent_delete-48-filled.png" alt="delete"></span>
+                                    <!-- <mat-icon (click)="remove(item)" class="del1">delete</mat-icon> -->
+                                </td>
+                            </tr>    
+                        </tbody>
+            
+                    </table>
+                </div>
+                
+                <div class="pagination d-flex justify-content-end">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+        
+            </div>
+        </div>
+    </div>
+
+
+<ng-template #contentEdit let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Update Meeting Room</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body" style="background: #E5E5E5;">
+        <form [formGroup]="editmeetingForm" (ngSubmit)="save(editmeetingForm.value)" style="margin-left: 10px;">
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                    <div class="form-group">
+                        <label for="">Meeting Room Name</label>
+                        <input type="text" class="form-control st-name" formControlName="Meeting_Name" placeholder="Meeting Room Name"
+                        [class.is-valid]="editmeetingForm.controls['Meeting_Name'].valid"
+                        [class.is-invalid]="!editmeetingForm.controls['Meeting_Name'].valid && submitted"
+                        >
+                        <span class="text-danger" *ngIf="editmeetingForm.controls['Meeting_Name'].hasError('required') && editmeetingForm.controls['Meeting_Name'].touched">
+                            Meeting Room Name is required*
+                        </span>
+                        <span class="text-danger" *ngIf="editmeetingForm.controls['Meeting_Name'].hasError('minlength') && editmeetingForm.controls['Meeting_Name'].touched">
+                            Meeting Room Name must be at least 3 characters long*
+                        </span>
+                        <span class="text-danger" *ngIf="editmeetingForm.controls['Meeting_Name'].hasError('maxlength') && editmeetingForm.controls['Meeting_Name'].touched">
+                            Meeting Room Name must be less than 25 characters*
+                        </span>
+                        <span class="text-danger" *ngIf="editmeetingForm.controls['Meeting_Name'].hasError('pattern') && editmeetingForm.controls['Meeting_Name'].touched">
+                            Meeting Room Name is invalid*
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                    <div class="form-group">
+                        <label for="">Location</label>
+                        <select class="form-select" formControlName="Location_Id">
+                            <option default value="">Select Location</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                    <div class="form-group">
+                        <label for="">Sitting Capacity</label>
+                        <mat-icon class="remove" (click)="minus1()">remove</mat-icon>
+                        <input type="text" class="form-control st-qty" [(ngModel)]="sitting1" formControlName="Meeting_Size" placeholder="Sitting Capacity"
+                        [class.is-valid]="editmeetingForm.controls['Meeting_Size'].valid"
+                        [class.is-invalid]="!editmeetingForm.controls['Meeting_Size'].valid && submitted"
+                        >
+                        <mat-icon class="add" (click)="plus1()">add</mat-icon>
+                        <span class="text-danger" *ngIf="editmeetingForm.controls['Meeting_Size'].hasError('required') && editmeetingForm.controls['Meeting_Size'].touched">
+                            Siiting Capacity is required*
+                        </span>
+                        <span class="text-danger" *ngIf="editmeetingForm.controls['Meeting_Size'].hasError('pattern') && editmeetingForm.controls['Meeting_Size'].touched">
+                            Only Numbers are allowed*
+                        </span>
+                        <span class="text-danger" *ngIf="editmeetingForm.controls['Meeting_Size'].hasError('min') && editmeetingForm.controls['Meeting_Size'].touched">
+                            Siiting Capacity must be at least 1 count*
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                    <div class="form-group">
+                        <label for="">Meeting Floor</label>
+                        <mat-icon class="remove1" (click)="minus3()">remove</mat-icon>
+                        <input type="text" class="form-control st-qty" [(ngModel)]="floor1" formControlName="Meeting_Floor" placeholder="Meeting Floor"
+                        [class.is-valid]="editmeetingForm.controls['Meeting_Floor'].valid"
+                        [class.is-invalid]="!editmeetingForm.controls['Meeting_Floor'].valid && submitted"
+                        >
+                        <mat-icon class="add" (click)="plus3()">add</mat-icon>
+                        <span class="text-danger" *ngIf="editmeetingForm.controls['Meeting_Floor'].hasError('required') && editmeetingForm.controls['Meeting_Floor'].touched">
+                            Meeting Floor is required*
+                        </span>
+                        <span class="text-danger" *ngIf="editmeetingForm.controls['Meeting_Floor'].hasError('pattern') && editmeetingForm.controls['Meeting_Floor'].touched">
+                            Only Numbers are allowed*
+                        </span>
+                        <span class="text-danger" *ngIf="editmeetingForm.controls['Meeting_Floor'].hasError('min') && editmeetingForm.controls['Meeting_Floor'].touched">
+                            Meeting Floor must be at least 1 count*
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 col-xxl-8">
+                    <div class="form-group">
+                        <label for="">Description</label>
+                        <textarea formControlName="Meeting_Description" placeholder="Description" class="form-control st-rmk" id=""
+                        [class.is-valid]="editmeetingForm.controls['Meeting_Description'].valid"
+                        [class.is-invalid]="!editmeetingForm.controls['Meeting_Description'].valid && submitted"
+                        ></textarea>
+                        <span class="text-danger" *ngIf="editmeetingForm.controls['Meeting_Description'].hasError('required') && editmeetingForm.controls['Meeting_Description'].touched">
+                            Description are required*
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="form-group">
+                <button type="submit" class="btn btn-save"><i class="fa fa-floppy-o"></i> Save</button>
+            </div>
+          </form>
+    </div>
+</ng-template>
+</div>

@@ -1,0 +1,128 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 col-xxl-8">
+            <div>
+                <div class="form-group">
+                    <input type="text" class="form-control search-ct" [(ngModel)]="searchFilter" placeholder="Search Order">
+                </div>
+                <!-- <div>
+                    <mat-icon class="search">search</mat-icon>
+                </div> -->
+            </div>
+        </div>
+    </div>
+<!-- </div>
+
+<div class="container"> -->
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+            <div class="data-table">
+                <div class="table-responsive">
+                    <table class="table table-borderless table-striped table-hover">
+                    
+                        <thead>
+                            <tr>
+                                <!-- <th>Sr. No.</th> -->
+                                <th>Order Id</th>
+                                <th>User Id</th>
+                                <th>Item Name</th>
+                                <th>Item Quantity</th>
+                                <th>Order Date</th>
+                                <th>Meeting Room Name</th>
+                                <th>Location</th>
+                                <th>Order Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                
+                        <tbody>
+                            <tr *ngFor="let item of this.pantryOrderList | filter: searchFilter | paginate: {itemsPerPage: 15, currentPage: p} let i = index">
+                                <!-- <td>{{i+1}}</td> -->
+                                <td>{{item.cart_Id}}</td>
+                                <td>{{item.UserId}}</td>
+                                <td>{{item.Item_Name | titlecase}}</td>
+                                <td>{{item.Total_Cart_Quantity | number}}</td>
+                                <td *ngIf="item.Order_date == null else dtBlock">--</td>
+                                <ng-template #dtBlock>
+                                    <td>{{item.Order_date | date: "dd/MM/yyyy hh:mm:ss a"}}</td>
+                                </ng-template>
+                                <td>{{item.Meeting_Name | titlecase}}</td>
+                                <td>{{item.Location_Name | titlecase}}</td>
+                                <td *ngIf="item.Order_Delivery_Remark == null else delBlock">Confirmed</td>
+                                <ng-template #delBlock>
+                                    <td>{{item.Order_Delivery_Remark == 'Cancel' ? 'Cancel' : 'Delivered'}}</td>
+                                </ng-template>
+                                <ng-container *ngIf="item.Order_Delivery_Remark == null else elseBlock">
+                                    <td style="text-align: center;">
+                                        <span class="edit1" style="text-align: center;" (click)="edit(orderEdit, item.cart_Id)">
+                                            <img src="../../../assets/img/fluent_edit-48-filled.png" alt="edit">
+                                        </span>
+                                        <span class="vertical-line"></span>
+                                    </td>
+                                </ng-container>
+                                <ng-template #elseBlock>
+                                    <td class="text-center">--</td>
+                                </ng-template>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="pagination d-flex justify-content-end">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+    
+    <ng-template #orderEdit let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Update Order Status</h4>
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body" style="background: #E5E5E5;">
+
+            <form style="margin-left: 10px;"> 
+                <div class="row" *ngFor="let cart of singlestationerydata">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                        <div class="form-group">
+                            <label for="">Item name</label>
+                            <input type="text" class="form-control st-name" value="{{cart.Item_Name}}" readonly>
+                        </div>
+                    </div>
+    
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                        <div class="form-group">
+                            <label for="">Item Quantity</label>
+                            <input type="text" class="form-control st-name" value="{{cart.Item_Qty}}" readonly>
+                        </div>
+                    </div>
+                </div>
+            </form>
+                <form [formGroup]="editOrderForm" (ngSubmit)="update(editOrderForm.value)" style="margin-left: 10px;">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                        <div class="form-group">
+                            <label for="">Order Status</label>
+                            <select class="form-select" formControlName="Order_Delivery_Remark">
+                                <option default value="Select remark">Select remark</option>
+                                <option value="Delivered">Delivered</option>
+                                <option value="Process">Process</option>
+                                <option value="Cancel">Cancel</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <!-- <button type="submit" class="btn btn-save" (click)="addRow()">Save</button> -->
+                    <button type="submit" class="btn btn-save"><i class="fa fa-floppy-o"></i> Save</button>
+                </div>
+              </form>
+
+        </div>
+
+    </ng-template>
+
+</div>

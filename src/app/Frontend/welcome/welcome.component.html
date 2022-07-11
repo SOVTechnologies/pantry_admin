@@ -1,0 +1,39 @@
+<!-- *ngIf="isLoggedIn$ | async" -->
+<mat-sidenav-container> 
+    <mat-sidenav mode="side" opened>
+        <div class="logo">
+            <a mat-list-item class="navbar-brand" routerLink="" routerLinkActive="active">
+                <img class="img" src="../../../assets/img/logo 1.png" />
+            </a>
+        </div>  
+        <ul class="navList">
+            <!-- <li> 
+                <a mat-list-item class="navbar-brand" routerLink="" routerLinkActive="active">
+                    <img class="img" src="../../../assets/img/square-logo.png" />
+                </a>
+            </li> -->
+            <!-- routerLink="super-admin" -->
+            <li class="stationery" routerLink="dashboard" routerLinkActive="active">Dashboard</li>
+   
+            <li class="pantry" routerLink="pantry" routerLinkActive="active">Pantry Master</li>
+
+            <!-- <li class="food-counter" routerLink="food-counter" routerLinkActive="active">Food Counter</li> -->
+
+            <!-- <li class="meeting" routerLink="meeting-room" routerLinkActive="active">Meeting Master</li> -->
+
+            <li class="order-list" routerLink="order-list" routerLinkActive="active">Order History</li>
+
+
+            <!-- <li class="logout" (click)="onLogout()">Log Out</li> -->
+            <!-- <span class="logout-icon"><img src="../../../assets/img/iwwa_logout.png" alt="logout"></span> -->
+        </ul>
+
+     </mat-sidenav>
+
+     <mat-sidenav-content>
+        <!-- <div class="container">  -->
+            <app-header></app-header>
+            <router-outlet></router-outlet>
+        <!-- </div> -->
+    </mat-sidenav-content> 
+</mat-sidenav-container>

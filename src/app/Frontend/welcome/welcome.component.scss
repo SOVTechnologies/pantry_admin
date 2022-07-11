@@ -1,0 +1,251 @@
+@media (min-width: 768px){
+  body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-y: hidden;
+  }
+  .mat-sidenav-container {
+    height: 100%;
+    width: 100%0;
+  }
+  .mat-sidenav {
+    width: 20%;
+    background: #FDFDEC;
+    box-sizing: border-box;
+    box-shadow: 5px 10px #FDFDEC;
+    overflow-y: hidden !important;
+  }
+  .mat-sidenav-content{
+    height: 100%;
+    width: 80%;
+    overflow-x: hidden;
+  }
+  .container{
+    margin-top: 10px;
+    width: 100%;
+    height: 90%;
+  }
+  .logo{
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  .logo .img{
+    width: 120px;
+    height: 60px;
+  }
+  .navList {
+    list-style-type: none;
+    list-style: none;
+    line-height: 0rem;
+    margin-top: 1rem;
+  }
+  
+  .navList li {
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 0.8rem;
+    line-height: 1.6rem;
+    color: #004A80;
+  }
+  .navList li:hover{
+    color: #F98527;
+  }
+  .active{
+    color: #F98527 !important;
+  }
+  .logout {
+    margin-top: 14rem;
+  }
+}
+
+@media (min-width: 992px) {
+  body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-y: hidden;
+  }
+  .mat-sidenav-container {
+    height: 100%;
+    width: 100%0;
+  }
+  .mat-sidenav {
+    width: 20%;
+    background: #FDFDEC;
+    box-sizing: border-box;
+    box-shadow: 5px 10px #FDFDEC;
+    overflow-y: hidden !important;
+  }
+  .mat-sidenav-content{
+    height: 100%;
+    width: 80%;
+    overflow-x: hidden;
+  }
+  .container{
+    margin-top: 10px;
+    width: 100%;
+    height: 90%;
+  }
+  .logo{
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  .logo .img{
+    width: 165px;
+    height: 80px;
+  }
+  .navList {
+    list-style-type: none;
+    list-style: none;
+    line-height: 0rem;
+    margin-top: 1rem;
+  }
+  
+  .navList li {
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 2.5rem;
+    color: #004A80;
+  }
+  .navList li:hover{
+    color: #F98527;
+  }
+  .active{
+    color: #F98527 !important;
+  }
+  .logout {
+    margin-top: 16rem;
+  }
+}
+
+@media (min-width: 1200px){
+  body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-y: hidden;
+  }
+  .mat-sidenav-container {
+    height: 100%;
+    width: 100%0;
+  }
+  .mat-sidenav {
+    width: 20%;
+    background: #FDFDEC;
+    box-sizing: border-box;
+    box-shadow: 5px 10px #FDFDEC;
+    overflow-y: hidden !important;
+  }
+  .mat-sidenav-content{
+    height: 100%;
+    width: 80%;
+    overflow-x: hidden;
+  }
+  .container{
+    margin-top: 10px;
+    width: 100%;
+    height: 90%;
+  }
+  .logo{
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  .logo .img{
+    width: 200px;
+    height: 90px;
+  }
+  .navList {
+    list-style-type: none;
+    list-style: none;
+    line-height: 0rem;
+    margin-top: 1rem;
+  }
+  
+  .navList li {
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.2rem;
+    line-height: 3.5rem;
+    color: #004A80;
+  }
+  .navList li:hover{
+    color: #F98527;
+  }
+  .active{
+    color: #F98527 !important;
+  }
+  .logout {
+    margin-top: 20rem;
+  }
+}
+
+@media (min-width: 1400px){
+  body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-y: hidden;
+  }
+  .mat-sidenav-container {
+    height: 100%;
+    width: 100%0;
+  }
+  .mat-sidenav {
+    width: 20%;
+    background: #FDFDEC;
+    box-sizing: border-box;
+    box-shadow: 5px 10px #FDFDEC;
+    overflow-y: hidden !important;
+  }
+  .mat-sidenav-content{
+    height: 100%;
+    width: 80%;
+    overflow-x: hidden;
+  }
+  .container{
+    margin-top: 10px;
+    width: 100%;
+    height: 90%;
+  }
+  .logo{
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  .logo .img{
+    width: 261px;
+    height: 98px;
+  }  
+  .navList {
+    list-style-type: none;
+    list-style: none;
+    line-height: 0rem;
+    margin-top: 1rem;
+  }
+  
+  .navList li {
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 4rem;
+    color: #004A80;
+  }
+  .navList li:hover{
+    color: #F98527;
+  }
+  .active{
+    color: #F98527 !important;
+  }
+  .logout {
+    margin-top: 23rem;
+  }
+}
