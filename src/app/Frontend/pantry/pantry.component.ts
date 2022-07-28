@@ -277,16 +277,7 @@ export class PantryComponent implements OnInit {
 
     const params: any = new HttpParams().append('Item_Id', Item_Id).append('UserId', UserId).append('Pantry_Id', Pantry_Id).append('Location_Id', Location_Id);
 
-    this.http.post(`http://ozoneapi.laymoek.com/api/v1/Pantry/Item/DelPantryItem?Item_Id=${Item_Id}&UserId=${UserId}&Pantry_Id=${Pantry_Id}&Location_Id=${Location_Id}&EntryDate=${DATE}`, {params: params}).pipe(
-      tap(() => {
-        this._refreshStationeryList$.next();
-      })
-    ).subscribe((item) => {
-      console.log(item);
-      this.toast.warning({detail: 'Message', summary: 'Pantry Item Delete Successfully.', duration: 5000, position: 'br'});
-    })
-
-    // this.http.post(`https://ozoneapi.icicidev.com/api/v1/Pantry/Item/DelPantryItem?Item_Id=${Item_Id}&UserId=${UserId}&Pantry_Id=${Pantry_Id}&Location_Id=${Location_Id}`, {params: params}).pipe(
+    // this.http.post(`http://ozoneapi.laymoek.com/api/v1/Pantry/Item/DelPantryItem?Item_Id=${Item_Id}&UserId=${UserId}&Pantry_Id=${Pantry_Id}&Location_Id=${Location_Id}&EntryDate=${DATE}`, {params: params}).pipe(
     //   tap(() => {
     //     this._refreshStationeryList$.next();
     //   })
@@ -294,6 +285,15 @@ export class PantryComponent implements OnInit {
     //   console.log(item);
     //   this.toast.warning({detail: 'Message', summary: 'Pantry Item Delete Successfully.', duration: 5000, position: 'br'});
     // })
+
+    this.http.post(`https://ozoneapi.icicidev.com/api/v1/Pantry/Item/DelPantryItem?Item_Id=${Item_Id}&UserId=${UserId}&Pantry_Id=${Pantry_Id}&Location_Id=${Location_Id}&EntryDate=${DATE}`, {params: params}).pipe(
+      tap(() => {
+        this._refreshStationeryList$.next();
+      })
+    ).subscribe((item) => {
+      console.log(item);
+      this.toast.warning({detail: 'Message', summary: 'Pantry Item Delete Successfully.', duration: 5000, position: 'br'});
+    })
   }
 
 }
