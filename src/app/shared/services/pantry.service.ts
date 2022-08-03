@@ -8,8 +8,8 @@ import { tap } from "rxjs/operators";
 
 export class PantryService {
 
-  // private api_url = "http://ozoneapi.laymoek.com";
-  private api_url = "https://ozoneapi.icicidev.com";
+  private api_url = "http://ozoneapi.laymoek.com";
+  // private api_url = "https://ozoneapi.icicidev.com";
     // "http://ozoneapi.laymoek.com"; 
     // "https://ozoneapi.icicidev.com";
 
