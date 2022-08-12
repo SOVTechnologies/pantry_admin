@@ -134,6 +134,12 @@ export class PantryComponent implements OnInit {
     })
   }
 
+  Space(event: any){
+    if(event.target.selectionStart === 0 && event.code === "Space"){
+      event.preventDefault();
+    }
+  }
+
 
   save(data:any){
     this.submitted = true;

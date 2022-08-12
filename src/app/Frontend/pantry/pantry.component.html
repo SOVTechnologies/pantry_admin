@@ -36,7 +36,7 @@
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
                             <div class="form-group">
                                 <label for="">Item Name</label>
-                                <input type="text" class="form-control st-name" formControlName="Item_Name" placeholder="Item Name"
+                                <input type="text" class="form-control st-name" formControlName="Item_Name" (keydown)="Space($event)" placeholder="Item Name"
                                 [class.is-valid]="pantryForm.controls['Item_Name'].valid"
                                 [class.is-invalid]="!pantryForm.controls['Item_Name'].valid && submitted"
                                 >
@@ -81,7 +81,7 @@
                         <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 col-xxl-8">
                             <div class="form-group">
                                 <label for="">Item Description</label>
-                                <textarea formControlName="Item_Description" placeholder="Description" class="form-control st-rmk" id=""
+                                <textarea formControlName="Item_Description" (keydown)="Space($event)" placeholder="Description" class="form-control st-rmk" id=""
                                 [class.is-valid]="pantryForm.controls['Item_Description'].valid"
                                 [class.is-invalid]="!pantryForm.controls['Item_Description'].valid && submitted"
                                 ></textarea>
@@ -106,7 +106,7 @@
                 <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 col-xxl-8">
                     <div>
                         <div class="form-group">
-                            <input type="text" class="form-control search-ct" [(ngModel)]="searchFilter" placeholder="Search Pantry Item">
+                            <input type="text" class="form-control search-ct" (keydown)="Space($event)" [(ngModel)]="searchFilter" placeholder="Search Pantry Item">
                         </div>
                         <!-- <div>
                             <mat-icon class="search">search</mat-icon>

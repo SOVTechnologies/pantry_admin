@@ -25,6 +25,14 @@ export class OrderListComponent implements OnInit {
   searchFilter: any;
   p: number = 1;
   pantryOrderList: Array<any> = [];
+  delivered: boolean = false;
+  process: boolean = false;
+  cancel: boolean = false;
+  orderStatus: any;
+  userId: any;
+  employData: any;
+  employeName: any;
+  isSelected: boolean = true;
 
   constructor(private fb: FormBuilder ,private orderHistoryService: OrderHistoryServices ,  public modalService: NgbModal, private toast: NgToastService, private datepipe: DatePipe) { }
 
@@ -59,10 +67,16 @@ export class OrderListComponent implements OnInit {
           this.pantryOrderList.push(order);
         }
       });
-      console.log(this.pantryOrderList);
+      // console.log(this.pantryOrderList);
 
     });
-  }  
+  }
+
+  Space(event: any){
+    if(event.target.selectionStart === 0 && event.code === "Space"){
+      event.preventDefault();
+    }
+  }
 
 
   plus(){
@@ -88,8 +102,17 @@ export class OrderListComponent implements OnInit {
       this.singleData = data;
       this.singlestationerydata = this.singleData.PantryOrderList;
       // this.editForm.patchValue(this.singlestationerydata);
-      console.log(this.singlestationerydata);
+      // console.log(this.singlestationerydata);
       this.singlepantryorderstatus = this.singleData.PantryOrderList[0];
+      this.orderStatus = this.singlepantryorderstatus.Order_Delivery_Remark;
+      this.userId = this.singlepantryorderstatus.UserId;
+
+      this.orderHistoryService.getEmployData(this.userId).subscribe((item: any) => {
+        this.employData = item?.EmployeesList;
+        this.employeName = this.employData[0].Name;
+      })
+
+
     })
   }
 
@@ -110,34 +133,120 @@ export class OrderListComponent implements OnInit {
   //   console.log(res);
   // }
 
+  statusSelect(event: any){
+    if(event.target.value == 'Delivered'){
+      this.delivered = true;
+    }
+    else if(event.target.value == 'Process'){
+      this.process = true;
+    }
+    else if(event.target.value == 'Cancel'){
+      this.cancel = true;
+    }
+  }
+
 
   update(data: any) {
 
     // console.log(data);
+    if(this.process == true){
+      let Cart_Id = this.singlepantryorderstatus.cart_Id;
+      let userId = this.singlepantryorderstatus.UserId;
+      let date = new Date();
+      let DATE = this.datepipe.transform(date, 'MM/dd/yyyy hh:mm:ss');
 
-    let Cart_Id = this.singlepantryorderstatus.cart_Id;
-    let userId = this.singlepantryorderstatus.UserId;
-    let date = new Date();
-    let DATE = this.datepipe.transform(date, 'MM/dd/yyyy hh:mm:ss');
+      const formData: any = new FormData();
+      formData.append('Cart_Id', Cart_Id);
+      formData.append('Order_Delivery_Remark', this.editOrderForm.get('Order_Delivery_Remark')?.value);
+      formData.append('UserId', userId);
+      formData.append('EntryDate', DATE);
+      
+      this.orderHistoryService.deliveredOrder(formData).subscribe((data: any) => { 
+        // console.log(data)
+          this.toast.warning({detail: "Message", summary: 'Order is in under process.', duration: 5000, position: "br"});
 
-    const formData: any = new FormData();
-    formData.append('Cart_Id', Cart_Id);
-    formData.append('Order_Delivery_Remark', this.editOrderForm.get('Order_Delivery_Remark')?.value);
-    formData.append('UserId', userId);
-    formData.append('EntryDate', DATE);
+          this.modalService.dismissAll("submit");
+          this.editForm.reset({
+            'Order_Delivery_Remark': '',
+          });
+        }
+
+      )
+    }
+    if(this.delivered == true){
+      let Cart_Id = this.singlepantryorderstatus.cart_Id;
+      let userId = this.singlepantryorderstatus.UserId;
+      let date = new Date();
+      let DATE = this.datepipe.transform(date, 'MM/dd/yyyy hh:mm:ss');
+
+      const formData: any = new FormData();
+      formData.append('Cart_Id', Cart_Id);
+      formData.append('Order_Delivery_Remark', this.editOrderForm.get('Order_Delivery_Remark')?.value);
+      formData.append('UserId', userId);
+      formData.append('EntryDate', DATE);
+      
+      this.orderHistoryService.deliveredOrder(formData).subscribe((data: any) => { 
+        // console.log(data)
+          this.toast.warning({detail: "Message", summary: 'Order is delivered successfully.', duration: 5000, position: "br"});
+
+          this.modalService.dismissAll("submit");
+          this.editForm.reset({
+            'Order_Delivery_Remark': '',
+          });
+        }
+
+      )
+    }
+    if(this.cancel == true){
+      let Cart_Id = this.singlepantryorderstatus.cart_Id;
+      let userId = this.singlepantryorderstatus.UserId;
+      let date = new Date();
+      let DATE = this.datepipe.transform(date, 'MM/dd/yyyy hh:mm:ss');
+
+      const formData: any = new FormData();
+      formData.append('Cart_Id', Cart_Id);
+      formData.append('Order_Delivery_Remark', this.editOrderForm.get('Order_Delivery_Remark')?.value);
+      formData.append('UserId', userId);
+      formData.append('EntryDate', DATE);
+      
+      this.orderHistoryService.cancelOrerStatus(formData).subscribe((data: any) => { 
+        // console.log(data)
+          this.toast.warning({detail: "Message", summary: 'Order is canceled.', duration: 5000, position: "br"});
+
+          this.modalService.dismissAll("submit");
+          this.editForm.reset({
+            'Order_Delivery_Remark': '',
+          });
+        }
+
+      )
+    }
+  }
+
+  view(orderView: any, item: any){
+    this.modalService.open(orderView, {size: 'lg'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+
+    console.log(item);
+
+    this.orderHistoryService.getPantryById(item).subscribe(data =>{
+      this.singleData = data;
+      this.singlestationerydata = this.singleData.PantryOrderList;
+      // this.editForm.patchValue(this.singlestationerydata);
+      // console.log(this.singlestationerydata);
+      this.singlepantryorderstatus = this.singleData.PantryOrderList[0];
+      this.userId = this.singlepantryorderstatus.UserId;
+      this.orderStatus = this.singlepantryorderstatus.Order_Delivery_Remark;
+
+      this.orderHistoryService.getEmployData(this.userId).subscribe((item: any) => {
+        this.employData = item?.EmployeesList;
+        this.employeName = this.employData[0].Name;
+      })
+    })
     
-
-    console.log(formData);
-
-    this.orderHistoryService.deliveredOrder(formData).subscribe((data: any) => { 
-      // console.log(data)
-        this.toast.warning({detail: "Message", summary: data.response.Msg, duration: 5000, position: "br"});
-
-        this.modalService.dismissAll("submit");
-        // this.editForm.reset();
-      }
-
-    )
   }
 
 }

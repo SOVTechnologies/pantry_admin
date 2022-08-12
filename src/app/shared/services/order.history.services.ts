@@ -6,8 +6,8 @@ import {tap} from 'rxjs/operators';
 
 export class OrderHistoryServices{
 
-    private api_url = "http://ozoneapi.laymoek.com";
-    // private api_url = "https://ozoneapi.icicidev.com";
+    // private api_url = "http://ozoneapi.laymoek.com";
+    private api_url = "https://ozoneapi.icicidev.com";
     // "http://ozoneapi.laymoek.com"; 
     // "https://ozoneapi.icicidev.com";
     
@@ -16,6 +16,8 @@ export class OrderHistoryServices{
     private PANTRY_ORDER_LIST_ENDPOINT = this.api_url+"/api/v1/Pantry/Item/Order/GetPantryOrderList";
     private PANTRY_ORDER_LIST_BY_ID = this.api_url+"/api/v1/Pantry/Item/Order/GetPantryOrderByCartId?Cart_Id=";
     private DELIVERED_ORDER_LIST = this.api_url+"/api/v1/Pantry/Item/Order/PantryOrderDelivered";
+    private CANCEL_ORDER_LIST = this.api_url+"/api/v1/Pantry/Item/Order/PantryOrderCancelled";
+    private EMPLOY_DETAIL_ENDPOINT = this.api_url+"/api/v1/GetEmployeeById?Ldap_Id=";
 
     private _refreshStationeryList$ = new Subject<void>();
 
@@ -56,5 +58,16 @@ export class OrderHistoryServices{
                 this._refreshStationeryList$.next()
             })
         );
+    }
+    public cancelOrerStatus(data: any): Observable<any> {
+        return this.http.post<any>(this.CANCEL_ORDER_LIST, data)
+        .pipe(
+            tap(() => {
+                this._refreshStationeryList$.next();
+            })
+        )
+    }
+    public getEmployData(id: any): Observable<any> {
+        return this.http.get<any>(this.EMPLOY_DETAIL_ENDPOINT+id);
     }
 }

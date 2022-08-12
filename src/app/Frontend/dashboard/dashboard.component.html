@@ -6,7 +6,7 @@
                     Total Order Count
                 </mat-card-title>
                 <mat-card-content>
-                    {{totalOrderCount}}
+                    {{totalOrder.length}}
                 </mat-card-content>
                 <mat-card-footer>
                     <!-- <a [routerLink]="['../order-list']">Order<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a> -->
@@ -20,7 +20,7 @@
                     Confirmed Order Count
                 </mat-card-title>
                 <mat-card-content>
-                    {{Order_Process_Count}}
+                    {{OrderList.length}}
                 </mat-card-content>
                 <mat-card-footer>
                     <!-- <a [routerLink]="['../order-list']">Order<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a> -->
@@ -34,7 +34,7 @@
                     Delivered Order Count
                 </mat-card-title>
                 <mat-card-content>
-                    {{Order_Completed_Count}}
+                    {{OrderDelivered.length}}
                 </mat-card-content>
                 <mat-card-footer>
                     <!-- <a [routerLink]="['../order-list']">Order<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a> -->
@@ -54,30 +54,33 @@
                                 <!-- <th>Sr. No.</th> -->
                                 <th>Order Id</th>
                                 <th>User Id</th>
-                                <th>Item Name</th>
+                                <!-- <th>Item Name</th> -->
                                 <th>Location</th>
-                                <th>Meeting Room Name</th>
-                                <th>Item Quantity</th>
+                                <!-- <th>Meeting Room Name</th> -->
+                                <!-- <th>Item Quantity</th> -->
                                 <th>Order Date</th>
                                 <th>Order Status</th>
-                                <!-- <th scope="col" style="width: 115px;">Actions</th> -->
+                                <th scope="col" style="width: 115px;">Actions</th>
                             </tr>
                         </thead>
             
                         <tbody>
-                            <tr *ngFor="let item of order_array | paginate: {itemsPerPage: 10, currentPage: p} let i = index">
+                            <tr *ngFor="let item of OrderList | paginate: {itemsPerPage: 10, currentPage: p} let i = index">
                                 <!-- <td>{{i+1}}</td> -->
                                 <td>{{item.cart_Id}}</td>
                                 <td>{{item.UserId}}</td>
-                                <td>{{item.Item_Name | titlecase}}</td>
+                                <!-- <td>{{item.Item_Name | titlecase}}</td> -->
                                 <td>{{item.Location_Name | titlecase}}</td>
-                                <td>{{item.Meeting_Name | titlecase}}</td>
-                                <td>{{item.Total_Cart_Quantity | number}}</td>
+                                <!-- <td>{{item.Meeting_Name | titlecase}}</td> -->
+                                <!-- <td>{{item.Total_Cart_Quantity | number}}</td> -->
                                 <td *ngIf="item.Order_date == null else dtBlock">--</td>
                                 <ng-template #dtBlock>
                                     <td>{{item.Order_date | date: "dd/MM/yyyy hh:mm:ss a"}}</td>
                                 </ng-template>
                                 <td *ngIf="item.Order_Delivery_Remark == null">Confirmed</td>
+                                <td>
+                                    <button class="btn btn-save" (click)="view(orderView, item.cart_Id)">View Order</button>
+                                </td>
                             </tr>
                         </tbody>
                     
@@ -90,4 +93,61 @@
             </div>
         </div>
     </div>
+
+
+    <ng-template #orderView let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Order Details</h4>
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body" style="background: #E5E5E5;">
+
+          <!-- <form style="margin-left: 10px;">
+            
+            <div class="row" *ngFor="let cart of singleorderdata">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                    <div class="form-group">
+                        <label for="">Item name</label>
+                        <input type="text" class="form-control st-name" value="{{cart.Stationery_Name}}" readonly>
+                    </div>
+                </div>
+
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                    <div class="form-group">
+                        <label for="">Item Quantity</label>
+                        <input type="text" class="form-control st-name" value="{{cart.Stationery_Quantity}}" readonly>
+                    </div>
+                </div>
+            </div>
+            </form> -->
+            <div class="table-responsive">
+                <table class="table table-borderless table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Name</th>
+                            <th>Item Name</th>
+                            <th>Item Quantity</th>
+                            <th>Order Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let cart of singlestationerydata">
+                            <td>{{cart.UserId}}</td>
+                            <td>{{employeName}}</td>
+                            <td>{{cart.Item_Name}}</td>
+                            <td>{{cart.Item_Qty}}</td>
+                            <td *ngIf="cart.Order_date == null else dtBlock">--</td>
+                                <ng-template #dtBlock>
+                                    <td>{{cart.Order_date | date: "dd/MM/yyyy hh:mm:ss a"}}</td>
+                                </ng-template>
+                            <td *ngIf="cart.Order_Delivery_Remark == null">Confirmed</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </ng-template>
 </div>

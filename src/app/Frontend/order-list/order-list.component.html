@@ -3,7 +3,7 @@
         <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 col-xxl-8">
             <div>
                 <div class="form-group">
-                    <input type="text" class="form-control search-ct" [(ngModel)]="searchFilter" placeholder="Search Order">
+                    <input type="text" class="form-control search-ct" (keydown)="Space($event)" [(ngModel)]="searchFilter" placeholder="Search Order">
                 </div>
                 <!-- <div>
                     <mat-icon class="search">search</mat-icon>
@@ -25,10 +25,10 @@
                                 <!-- <th>Sr. No.</th> -->
                                 <th>Order Id</th>
                                 <th>User Id</th>
-                                <th>Item Name</th>
-                                <th>Item Quantity</th>
+                                <!-- <th>Item Name</th> -->
+                                <!-- <th>Item Quantity</th> -->
                                 <th>Order Date</th>
-                                <th>Meeting Room Name</th>
+                                <!-- <th>Meeting Room Name</th> -->
                                 <th>Location</th>
                                 <th>Order Status</th>
                                 <th>Actions</th>
@@ -40,28 +40,32 @@
                                 <!-- <td>{{i+1}}</td> -->
                                 <td>{{item.cart_Id}}</td>
                                 <td>{{item.UserId}}</td>
-                                <td>{{item.Item_Name | titlecase}}</td>
-                                <td>{{item.Total_Cart_Quantity | number}}</td>
+                                <!-- <td>{{item.Item_Name | titlecase}}</td> -->
+                                <!-- <td>{{item.Total_Cart_Quantity | number}}</td> -->
                                 <td *ngIf="item.Order_date == null else dtBlock">--</td>
                                 <ng-template #dtBlock>
                                     <td>{{item.Order_date | date: "dd/MM/yyyy hh:mm:ss a"}}</td>
                                 </ng-template>
-                                <td>{{item.Meeting_Name | titlecase}}</td>
+                                <!-- <td>{{item.Meeting_Name | titlecase}}</td> -->
                                 <td>{{item.Location_Name | titlecase}}</td>
                                 <td *ngIf="item.Order_Delivery_Remark == null else delBlock">Confirmed</td>
                                 <ng-template #delBlock>
-                                    <td>{{item.Order_Delivery_Remark == 'Cancel' ? 'Cancel' : 'Delivered'}}</td>
+                                    <td>{{item.Order_Delivery_Remark}}</td>
+                                    <!-- <td>{{item.Order_Delivery_Remark == 'Cancel' ? 'Cancel' : 'Delivered'}}</td> -->
                                 </ng-template>
-                                <ng-container *ngIf="item.Order_Delivery_Remark == null else elseBlock">
-                                    <td style="text-align: center;">
-                                        <span class="edit1" style="text-align: center;" (click)="edit(orderEdit, item.cart_Id)">
+                                <ng-container *ngIf="(item.Order_Delivery_Remark == null || item.Order_Delivery_Remark == 'Process') else elseBlock">
+                                    <td>
+                                        <button class="btn btn-save" (click)="edit(orderEdit, item.cart_Id)">View Order</button>
+                                        <!-- <span class="edit1" style="text-align: center;" (click)="edit(orderEdit, item.cart_Id)">
                                             <img src="../../../assets/img/fluent_edit-48-filled.png" alt="edit">
                                         </span>
-                                        <span class="vertical-line"></span>
+                                        <span class="vertical-line"></span> -->
                                     </td>
                                 </ng-container>
                                 <ng-template #elseBlock>
-                                    <td class="text-center">--</td>
+                                    <td>
+                                        <button class="btn btn-save" (click)="view(orderView, item.cart_Id)">View Order</button>
+                                    </td>
                                 </ng-template>
                             </tr>
                         </tbody>
@@ -82,9 +86,25 @@
           <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
         </div>
         <div class="modal-body" style="background: #E5E5E5;">
+            <form style="margin-left: 10px;">
 
-            <form style="margin-left: 10px;"> 
-                <div class="row" *ngFor="let cart of singlestationerydata">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                        <div class="form-group">
+                            <label for="">User ID</label>
+                            <input type="text" class="form-control st-name" value="{{userId}}" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                        <div class="form-group">
+                            <label for="">Name</label>
+                            <input type="datetime" class="form-control" value="{{employeName}}" readonly>
+                        </div>
+                    </div>
+                </div>
+            <ng-container *ngFor="let cart of singlestationerydata">
+                <div class="row">
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
                         <div class="form-group">
                             <label for="">Item name</label>
@@ -99,30 +119,95 @@
                         </div>
                     </div>
                 </div>
+                
+            </ng-container>
             </form>
-                <form [formGroup]="editOrderForm" (ngSubmit)="update(editOrderForm.value)" style="margin-left: 10px;">
-                <div class="row">
-                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
-                        <div class="form-group">
-                            <label for="">Order Status</label>
-                            <select class="form-select" formControlName="Order_Delivery_Remark">
-                                <option default value="Select remark">Select remark</option>
+            <form [formGroup]="editOrderForm" (ngSubmit)="update(editOrderForm.value)" style="margin-left: 10px;">
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                    <div class="form-group">
+                        <label for="">Order Status</label>
+                        <select class="form-select" (change)="statusSelect($event)" formControlName="Order_Delivery_Remark">
+                            <ng-container *ngIf="orderStatus == 'Process'; else StatusBlock">
+                                <option value="">Select remark</option>
+                                <option value="Delivered">Delivered</option>
+                                <option [selected]="isSelected" value="Process">Process</option>
+                                <option value="Cancel">Cancel</option>
+                            </ng-container>
+                            <ng-template #StatusBlock>
+                                <option default value="">Select remark</option>
                                 <option value="Delivered">Delivered</option>
                                 <option value="Process">Process</option>
                                 <option value="Cancel">Cancel</option>
-                            </select>
-                        </div>
+                            </ng-template>
+                            
+                        </select>
                     </div>
                 </div>
-                <hr>
-                <div class="form-group">
-                    <!-- <button type="submit" class="btn btn-save" (click)="addRow()">Save</button> -->
-                    <button type="submit" class="btn btn-save"><i class="fa fa-floppy-o"></i> Save</button>
+            </div>
+            <hr>
+            <div class="form-group">
+                <!-- <button type="submit" class="btn btn-save" (click)="addRow()">Save</button> -->
+                <button type="submit" class="btn btn-save"><i class="fa fa-floppy-o"></i> Save</button>
+            </div>
+          </form>
+        </div>
+    </ng-template>
+
+    <ng-template #orderView let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Order Details</h4>
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body" style="background: #E5E5E5;">
+
+          <!-- <form style="margin-left: 10px;">
+            
+            <div class="row" *ngFor="let cart of singleorderdata">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                    <div class="form-group">
+                        <label for="">Item name</label>
+                        <input type="text" class="form-control st-name" value="{{cart.Stationery_Name}}" readonly>
+                    </div>
                 </div>
-              </form>
+
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                    <div class="form-group">
+                        <label for="">Item Quantity</label>
+                        <input type="text" class="form-control st-name" value="{{cart.Stationery_Quantity}}" readonly>
+                    </div>
+                </div>
+            </div>
+            </form> -->
+            <div class="table-responsive">
+                <table class="table table-borderless table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Name</th>
+                            <th>Item Name</th>
+                            <th>Item Quantity</th>
+                            <th>Order Date</th>
+                            <th>Status</th>
+                            <th *ngIf="orderStatus == 'Delivered'">Delivery Date</th>
+                            <th *ngIf="orderStatus == 'Cancel'">Cancel Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let cart of singlestationerydata">
+                            <td>{{cart.UserId}}</td>
+                            <td>{{employeName}}</td>
+                            <td>{{cart.Item_Name}}</td>
+                            <td>{{cart.Item_Qty}}</td>
+                            <td>{{cart.Order_date | date: "dd/MM/yyyy hh:mm:ss a"}}</td>
+                            <td>{{cart.Order_Delivery_Remark}}</td>
+                            <td>{{cart.Order_Delivery_Date | date: "dd/MM/yyyy hh:mm:ss a"}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
         </div>
-
     </ng-template>
 
 </div>
